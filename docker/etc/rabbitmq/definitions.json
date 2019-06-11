@@ -1,0 +1,45 @@
+{
+    "rabbit_version": "3.7.15",
+    "users": [
+        {
+            "name": "guest",
+            "password_hash": "GEopb8tGuEFCwvpn+I+rxx6Z4zozrghcnDLL3X/E0t4cZZi7",
+            "hashing_algorithm": "rabbit_password_hashing_sha256",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "guest",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "topic_permissions": [],
+    "parameters": [],
+    "global_parameters": [
+        {
+            "name": "cluster_name",
+            "value": "rabbit@ecommerce-rabbit"
+        }
+    ],
+    "policies": [],
+    "queues": [
+        {
+            "name": "LOCAL_ORDER_CREATE",
+            "vhost": "/",
+            "durable": true,
+            "auto_delete": false,
+            "arguments": {}
+        }
+    ],
+    "exchanges": [],
+    "bindings": []
+}

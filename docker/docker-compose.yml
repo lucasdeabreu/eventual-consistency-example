@@ -1,0 +1,11 @@
+version: '2'
+services: 
+  ecommerce-rabbit:
+    image: rabbitmq:3-management
+    container_name: ecommerce-rabbit
+    hostname: ecommerce-rabbit
+    ports:
+      - "5050:15672"
+      - "5672:5672"
+    volumes:
+      - $PWD/etc/rabbitmq/definitions.json:/etc/rabbitmq/definitions.json
