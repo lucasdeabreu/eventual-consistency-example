@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
 
 @Builder
 @AllArgsConstructor
@@ -18,7 +20,6 @@ import java.math.BigDecimal;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -30,4 +31,14 @@ public class Order {
     @Column(nullable = false)
     private OrderStatus status;
 
+    @Transient
+    private List<OrderItem> items;
+
+    public void calculateValue() {
+        if (Objects.nonNull(items)) {
+            value = items.stream()
+                    .map(i -> BigDecimal.valueOf(i.getUnitPrice()).multiply(BigDecimal.valueOf(i.getQuantity())))
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+    }
 }
