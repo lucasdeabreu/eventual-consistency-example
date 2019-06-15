@@ -2,12 +2,14 @@ package dev.lucasdeabreu.paymentservice.service;
 
 import dev.lucasdeabreu.paymentservice.domain.Order;
 import dev.lucasdeabreu.paymentservice.domain.Payment;
+import dev.lucasdeabreu.paymentservice.domain.PaymentStatus;
 import dev.lucasdeabreu.paymentservice.exception.IncorrectValueException;
 import dev.lucasdeabreu.paymentservice.exception.OrderNotFoundException;
 import dev.lucasdeabreu.paymentservice.repository.OrderRepository;
 import dev.lucasdeabreu.paymentservice.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -29,11 +31,14 @@ public class PaymentServiceImpl implements PaymentService {
             throw new IncorrectValueException("Incorrect value of payment");
         }
 
+        payment.setStatus(PaymentStatus.PAYED);
+        payment.setPaymentDate(LocalDateTime.now());
+
         return paymentRepository.save(payment);
     }
 
     private boolean isCorrectValue(Payment payment, Order order) {
-        return !order.getValue().equals(payment.getValue());
+        return order.getValue().compareTo(payment.getValue()) != 0;
     }
 
     private Order getOrder(Payment payment) {

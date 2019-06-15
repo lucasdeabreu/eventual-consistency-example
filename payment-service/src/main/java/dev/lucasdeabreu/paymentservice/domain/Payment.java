@@ -9,6 +9,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
+import java.util.Optional;
 
 @Builder
 @AllArgsConstructor
@@ -42,5 +44,4 @@ public class Payment {
     @NotNull
     @Column(nullable = false)
     private Long orderId;
-
 }
