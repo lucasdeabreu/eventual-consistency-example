@@ -1,4 +1,4 @@
-#####The idea of this project is use eventual consistency to decoupling services between each other.
+##### The idea of this project is use eventual consistency to decoupling services between each other.
 
 In this example `payment-service` depend on `Order` information to 
 register a payment, instead of call `order-service` to request such 
